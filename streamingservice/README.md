@@ -7,7 +7,7 @@ Check out the project, build with maven and use in your project:
   <dependency>
     <groupId>io.neocdtv</groupId>
     <artifactId>StreamingService</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.1</version>
   </dependency>
 </dependencies>
 ```
