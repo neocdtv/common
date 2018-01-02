@@ -20,6 +20,7 @@ import java.util.logging.Logger;
  */
 public class UrlBuilder {
 
+    /*
     private final static Logger LOGGER = Logger.getLogger(UrlBuilder.class.getName());
     private static final String IPV4_REGEX = "\\A(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}\\z";
     private static String ipV4;
@@ -68,4 +69,5 @@ public class UrlBuilder {
         }
         return ipV4;
     }
+    */
 }

@@ -12,5 +12,4 @@ package io.neocdtv.service;
 public class StreamingServiceConstants {
     public static final String PARAM_NAME_RESOURCE = "resource";
     public static final String SERVLET_PATH = "/stream";
-    public static final int DEFAULT_SERVICE_PORT = 8888;
 }

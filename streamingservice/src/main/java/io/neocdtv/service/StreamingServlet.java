@@ -24,9 +24,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author xix
  */
-public class StreamingSerlvet extends HttpServlet {
+public class StreamingServlet extends HttpServlet {
 
-    private final static Logger LOGGER = Logger.getLogger(StreamingSerlvet.class.getName());
+    private final static Logger LOGGER = Logger.getLogger(StreamingServlet.class.getName());
     
     @Override
     protected void doGet(HttpServletRequest request,
