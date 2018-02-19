@@ -52,6 +52,7 @@ public class StringEscapeUtils {
                     break;
             }
         }
-        return String.format("\"%s\"", out.toString());
+        //return String.format("\"%s\"", out.toString());
+        return out.toString();
     }
 }

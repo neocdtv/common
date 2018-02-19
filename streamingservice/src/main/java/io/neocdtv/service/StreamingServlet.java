@@ -5,6 +5,10 @@
  */
 package io.neocdtv.service;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
@@ -15,45 +19,41 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
- *
  * @author xix
  */
 public class StreamingServlet extends HttpServlet {
 
-    private final static Logger LOGGER = Logger.getLogger(StreamingServlet.class.getName());
-    
-    @Override
-    protected void doGet(HttpServletRequest request,
-            HttpServletResponse response) throws ServletException, IOException {
-        
-        final String requestedResource = request.getParameter(StreamingServiceConstants.PARAM_NAME_RESOURCE);
-        try {
-            final FileInputStream fileInputStream = new FileInputStream(requestedResource);
-            final BufferedOutputStream out;
-            try (BufferedInputStream in = new BufferedInputStream(fileInputStream)) {
-                response.setContentType(determineMimeTypeForRequestedResource(requestedResource));
-                response.setStatus(HttpServletResponse.SC_OK);
-                out = new BufferedOutputStream(response.getOutputStream());
-                int c;
-                while ((c = in.read()) != -1) {
-                    out.write(c);
-                }
-            }
-            out.close();
-        } catch (FileNotFoundException ex) {
-            LOGGER.log(Level.SEVERE, null, ex);
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        }
-    }
+  private final static Logger LOGGER = Logger.getLogger(StreamingServlet.class.getName());
 
-    private String determineMimeTypeForRequestedResource(final String requestedResource) throws IOException {
-        final Path path = FileSystems.getDefault().getPath(requestedResource);
-        return Files.probeContentType(path);
+  @Override
+  protected void doGet(HttpServletRequest request,
+                       HttpServletResponse response) throws ServletException, IOException {
+
+    final String requestedResource = request.getParameter(StreamingServiceConstants.PARAM_NAME_RESOURCE);
+    try {
+      LOGGER.info("Requested Resource: " + requestedResource);
+      final FileInputStream fileInputStream = new FileInputStream(requestedResource);
+      final BufferedOutputStream out;
+      try (BufferedInputStream in = new BufferedInputStream(fileInputStream)) {
+        response.setContentType(determineMimeTypeForRequestedResource(requestedResource));
+        response.setStatus(HttpServletResponse.SC_OK);
+        out = new BufferedOutputStream(response.getOutputStream());
+        int c;
+        while ((c = in.read()) != -1) {
+          out.write(c);
+        }
+      }
+      out.close();
+    } catch (FileNotFoundException ex) {
+      LOGGER.log(Level.SEVERE, null, ex);
+      response.setStatus(HttpServletResponse.SC_NOT_FOUND);
     }
+  }
+
+  private String determineMimeTypeForRequestedResource(final String requestedResource) throws IOException {
+    final Path path = FileSystems.getDefault().getPath(requestedResource);
+    return Files.probeContentType(path);
+  }
 }
