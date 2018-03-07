@@ -13,10 +13,10 @@ public class StreamingService {
   static int PORT;
 
   public static void main(String[] args) throws Exception {
-    StreamingService.start();
+    StreamingService.startIt();
   }
 
-  public static void start() throws Exception {
+  public static void startIt() throws Exception {
     PORT = discoverFreeNetworkPort();
     Server server = new Server(PORT);
 
