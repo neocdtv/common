@@ -29,7 +29,7 @@ public class UrlBuilder {
   private static final String IPV4_REGEX = "\\A(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}\\z";
   private static String ipV4;
   private static final String UTF8 = "UTF-8";
-  private static boolean ENCODE_URL_PARAM = false;
+  private static boolean ENCODE_URL_PARAM = true;
 
   public static String build(final String url) {
     if (url.startsWith("http")) {
